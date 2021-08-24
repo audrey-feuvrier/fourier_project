@@ -10,11 +10,11 @@ void ofApp::setup(){
 	phase 				= 0;
 	phaseAdder 			= 0.0f;
 	phaseAdderTarget 	= 0.0f;
-	volume				= 0.1f;
+	volume				= 0.05f;
 	bNoise 				= false;
 
 	lAudio.assign(bufferSize, 0.0);
-	rAudio.assign(bufferSize, 0.0);
+	// rAudio.assign(bufferSize, 0.0);
 	
 	soundStream.printDeviceList();
 
@@ -74,6 +74,7 @@ void ofApp::draw(){
 	ofSetColor(225);
 	ofDrawBitmapString("AUDIO OUTPUT EXAMPLE", 32, 32);
 	ofDrawBitmapString("press 's' to unpause the audio\npress 'e' to pause the audio", 31, 92);
+	ofDrawBitmapString("click to get white noise", 31, 122);
 	
 	ofNoFill();
 	
@@ -83,13 +84,13 @@ void ofApp::draw(){
 		ofTranslate(32, 150, 0);
 			
 		ofSetColor(225);
-		ofDrawBitmapString("Left Channel", 4, 18);
+		ofDrawBitmapString("Sinus signal", 4, 18);
 		
 		ofSetLineWidth(1);	
 		ofDrawRectangle(0, 0, 900, 200);
 
-		ofSetColor(245, 58, 135);
-		ofSetLineWidth(3);
+		ofSetColor(255, 255, 255);
+		ofSetLineWidth(5);
 					
 			ofBeginShape();
 			for (unsigned int i = 0; i < lAudio.size(); i++){
@@ -107,13 +108,13 @@ void ofApp::draw(){
 		ofTranslate(32, 350, 0);
 			
 		ofSetColor(225);
-		ofDrawBitmapString("Right Channel", 4, 18);
+		ofDrawBitmapString("FFT", 4, 18);
 		
 		ofSetLineWidth(1);	
 		ofDrawRectangle(0, 0, 900, 200);
 
-		ofSetColor(245, 58, 135);
-		ofSetLineWidth(3);
+		ofSetColor(4, 139, 154);
+		ofSetLineWidth(2);
 					
 			ofBeginShape();
 			for (unsigned int i = 0; i < rAudio.size(); i++){
@@ -221,7 +222,8 @@ void ofApp::audioOut(ofSoundBuffer & buffer){
 		// ---------------------- noise --------------
 		for (size_t i = 0; i < buffer.getNumFrames(); i++){
 			lAudio[i] = buffer[i*buffer.getNumChannels()    ] = ofRandom(0, 1) * volume * leftScale;
-			rAudio[i] = buffer[i*buffer.getNumChannels() + 1] = ofRandom(0, 1) * volume * rightScale;
+			rAudio[i] = buffer[i*buffer.getNumChannels() + 1] = lAudio[i];
+			// replace ofRandom(0, 1) * volume * rightScale with the sound of lAudio;
 		}
 	} else {
 		phaseAdder = 0.95f * phaseAdder + 0.05f * phaseAdderTarget;
@@ -229,7 +231,8 @@ void ofApp::audioOut(ofSoundBuffer & buffer){
 			phase += phaseAdder;
 			float sample = sin(phase);
 			lAudio[i] = buffer[i*buffer.getNumChannels()    ] = sample * volume * leftScale;
-			rAudio[i] = buffer[i*buffer.getNumChannels() + 1] = sample * volume * rightScale;
+			rAudio[i] = buffer[i*buffer.getNumChannels() + 1] = lAudio[i];
+			// replace sample * volume * rightScale with the sound of lAudio;
 		}
 	}
 

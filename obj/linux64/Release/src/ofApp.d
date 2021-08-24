@@ -1,6 +1,6 @@
 obj/linux64/Release/src/ofApp.o: \
- /home/d5learner-02/Dev/OF/examples/sound/audioOutputExample/src/ofApp.cpp \
- /home/d5learner-02/Dev/OF/examples/sound/audioOutputExample/src/ofApp.h \
+ /home/d5learner-02/Dev/OF/examples/sound/audioOutputExample_Fourier/src/ofApp.cpp \
+ /home/d5learner-02/Dev/OF/examples/sound/audioOutputExample_Fourier/src/ofApp.h \
  /home/d5learner-02/Dev/OF/libs/openFrameworks/ofMain.h \
  /home/d5learner-02/Dev/OF/libs/openFrameworks/utils/ofConstants.h \
  /home/d5learner-02/Dev/OF/libs/tess2/include/tesselator.h \
@@ -522,7 +522,7 @@ obj/linux64/Release/src/ofApp.o: \
  /home/d5learner-02/Dev/OF/libs/openFrameworks/3d/ofCamera.h \
  /home/d5learner-02/Dev/OF/libs/openFrameworks/3d/ofEasyCam.h
 
-/home/d5learner-02/Dev/OF/examples/sound/audioOutputExample/src/ofApp.h:
+/home/d5learner-02/Dev/OF/examples/sound/audioOutputExample_Fourier/src/ofApp.h:
 
 /home/d5learner-02/Dev/OF/libs/openFrameworks/ofMain.h:
 
